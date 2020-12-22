@@ -26,16 +26,19 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - uses: actions/set-python@v2
-        with: 
-          python-version: ${{ matrix.python-version }}
+      - name: Install Python dependencies
+        uses: py-actions/py-dependency-install@v2
+            
+      #- name: Setup python
+      #  uses: actions/set-python@v2
+      #  with: 
+      #    python-version: ${{ matrix.python-version }}
+      - run:  python mytest.py
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, Jin!
-      # Runs a python program
-      - name: Run my python program
-        run: python mytest.py
+        
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
