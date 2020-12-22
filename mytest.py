@@ -1,3 +1,4 @@
+import json
 
 def read_input_file():
     with open('text', 'r') as f:
@@ -7,7 +8,7 @@ def read_input_file():
             line = f.readline()
 
 def write_output_file():
-    with open('out.txt', 'w') as f:
+    with open('out.json', 'w') as f:
         dataout = {
             "total_number_of_lines_processed": 4,
             "total_number_of_lines_ok": 4,
@@ -24,7 +25,7 @@ def write_output_file():
                 "/product/cart": 1.2
             }
         }
-        f.write(dataout)
+        json.dump(dataout, f)
 
 def process_data():
     print('Log parsing and processing.....')
