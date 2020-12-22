@@ -3,7 +3,7 @@ def read_input_file():
         line = f.readline()
         while line:
             print(line)
-            line = f.readdline()
+            line = f.readline()
 
 def write_output_file():
     print('To be done')
