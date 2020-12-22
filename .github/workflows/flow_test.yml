@@ -26,9 +26,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-        
-      # Runs python setup 
-      - name: Setup python
       - uses: actions/set-python@v2
         with: 
           python-version: ${{ matrix.python-version }}
