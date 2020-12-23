@@ -73,7 +73,7 @@ def log_parser_plugin():
 
     lp = LogParser(3,4)
     print("Result from AB:")
-    print(lp.plus_ab(), lp.multiply_ab)()
+    print(lp.plus_ab(), lp.multiply_ab())
 
     lines = read_input_file('log.txt')
     process_data()
