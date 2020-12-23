@@ -15,12 +15,9 @@ def read_input_file(file_name):
     line_read = 0
     with open(file_name, 'r') as f:
         line = f.readline()
-        line_read += 1
         while line:
-            print(line)
+            line_read += 1
             line = f.readline()
-            if line:
-                line_read += 1
     return line_read
 
 def write_output_file():
