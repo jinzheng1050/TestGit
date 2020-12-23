@@ -37,7 +37,7 @@ jobs:
 
       # Testing
       - name: Run python test
-        run:  pytest -v --cov
+        run:  pytest
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
