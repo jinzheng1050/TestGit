@@ -1,4 +1,4 @@
-import ..mytest
+from .. import mytest
 
 class TestMytest:
 
