@@ -8,7 +8,8 @@ def read_input_file(file_name):
         while line:
             print(line)
             line = f.readline()
-            line_read += 1
+            if line:
+                line_read += 1
     return line_read
 
 def write_output_file():
