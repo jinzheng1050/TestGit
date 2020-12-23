@@ -8,7 +8,7 @@ def read_input_file():
         while line:
             print(line)
             line = f.readline()
-            lin_read += 1
+            line_read += 1
     return line_read
 
 def write_output_file():
@@ -39,7 +39,8 @@ def process_data():
 if __name__ == '__main__':
 
     print('Start my python')
-    read_input_file()
+    lines = read_input_file()
     process_data()
-    write_output_file()
+    length = write_output_file()
+    print('Read ' + str(lines) + ' lines, write ' + str(length) + ' characters to out.json.')
 
