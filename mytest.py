@@ -1,4 +1,15 @@
-import json
+import json, sys, re
+'''
+class LogParser():
+
+    def __init__(self, file_in, file_out):
+        self.fin, self.fout = file_in, file_out
+        
+
+    def read_lines(self, lines=128):
+        pass
+'''
+
 
 def read_input_file(file_name):
     line_read = 0
@@ -39,7 +50,9 @@ def process_data():
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
 
-    print('Start my python1')
+    
+    print('Start my python')
+    print(sys.argv)
     lines = read_input_file('log.txt')
     process_data()
     length = write_output_file()
