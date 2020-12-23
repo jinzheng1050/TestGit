@@ -35,6 +35,10 @@ jobs:
       #    python-version: ${{ matrix.python-version }}
       - run:  python mytest.py
 
+      # Testing
+      - name: Run python test
+        run:  pytest -v --cov
+
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, Jin!
