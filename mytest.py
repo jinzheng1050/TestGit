@@ -47,14 +47,42 @@ def write_output_file():
 def process_data():
     print('Log parsing and processing.....')
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
+class LogParser():
 
-    
-    print('Start my python')
+    def __init__(self, a, b):
+        self.a, self.b = a,b
+
+    def plus_ab(self):
+        return self.a + self.b
+
+    def multiply_ab(self):
+        return self.a * self.b
+
+def validate_cmd_flags():
     print(sys.argv)
+
+    return True
+
+
+def log_parser_plugin():
+
+    print('Start Log-Parser......')
+    if not validate_cmd_flags(sys.argv):
+        print('Invalid command line flags')
+        return 1
+
+    lp = LogParser(3,4)
+    print("Result from AB:")
+    print(lp.plus_ab(), lp.multiply_ab)()
+
     lines = read_input_file('log.txt')
     process_data()
     length = write_output_file()
     print('Read ' + str(lines) + ' lines, write ' + str(length) + ' characters to out.json.')
+
+
+# Press the green button in the gutter to run the script.
+if __name__ == '__main__':
+
+    log_parser_plugin()
 
