@@ -1,4 +1,4 @@
-import mytest
+import ..mytest
 
 class TestMytest:
 
