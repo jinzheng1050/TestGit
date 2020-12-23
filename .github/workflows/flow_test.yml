@@ -33,7 +33,7 @@ jobs:
       #  uses: actions/set-python@v2
       #  with: 
       #    python-version: ${{ matrix.python-version }}
-      - run:  python mytest.py
+      - run:  python mytest.py -in log.txt -out out.json -max-client-ips 20 -max-path 30
 
       # Testing
       - name: Run python test
