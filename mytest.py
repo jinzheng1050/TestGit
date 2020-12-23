@@ -38,7 +38,7 @@ def process_data():
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
 
-    print('Start my python')
+    print('Start my python1')
     lines = read_input_file('log.txt')
     process_data()
     length = write_output_file()
