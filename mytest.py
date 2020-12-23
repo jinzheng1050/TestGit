@@ -1,8 +1,8 @@
 import json
 
-def read_input_file():
+def read_input_file(file_name):
     line_read = 0
-    with open('text', 'r') as f:
+    with open(file_name, 'r') as f:
         line = f.readline()
         line_read += 1
         while line:
@@ -39,7 +39,7 @@ def process_data():
 if __name__ == '__main__':
 
     print('Start my python')
-    lines = read_input_file()
+    lines = read_input_file('log.txt')
     process_data()
     length = write_output_file()
     print('Read ' + str(lines) + ' lines, write ' + str(length) + ' characters to out.json.')
