@@ -67,7 +67,7 @@ def validate_cmd_flags():
 def log_parser_plugin():
 
     print('Start Log-Parser......')
-    if not validate_cmd_flags(sys.argv):
+    if not validate_cmd_flags():
         print('Invalid command line flags')
         return 1
 
