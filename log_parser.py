@@ -42,7 +42,7 @@ class LogParser():
         with open(self.input_file, 'r') as fin:
             i = 0
             for block in self.read_lines(fin):
-                print('Process block ' + str(i) + ', ' + str(len(blocks)) + ' lines')
+                print('Process block ' + str(i) + ', ' + str(len(block)) + ' lines')
                 print(block)
                 i += 1
 
