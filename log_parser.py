@@ -24,21 +24,28 @@ class LogParser():
 
         self.results = {}
 
-    def read_line(self, f):
-        return f.readline()
+    def read_lines(self, f):
+        line_block_size = 3
+        end = line_block_size
+
+        while True:
+            lines = f.readlines(end)
+            if not lines:
+                break
+            end += line_block_size
+            yield lines
 
 
     def log_process(self):
         
         total_lines = 0
         with open(self.input_file, 'r') as fin:
-            line = self.read_line(fin)
-            while line:
-                total_lines += 1
-                '''
-                self.data() update
-                '''
-                line = self.read_line(fin)
+            int i = 0
+            for block in self.read_lines(fin)
+                print('Process block ' + str(i) + ', ' + str(len(blocks)) + ' lines')
+                print(block)
+                i += 1
+
         with open(self.output_file, 'w') as fout:
             json.dump(self.data, fout)
 
