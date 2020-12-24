@@ -4,6 +4,9 @@ from log_parser import LogParser
 
 def get_settings():
     print(sys.argv)
+    for i in range(len(sys.argv)):
+        print(str(i) + ': ' + sys.argv[i])
+
     settings = {'input_file':'log.txt', 
                 'output_file': 'results.json'}
 
