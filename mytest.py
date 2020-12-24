@@ -12,8 +12,8 @@ def get_settings():
 def log_parser_plugin():
 
     print('Start Log-Parser......')
-    settings = get_settings():
-    if not settings
+    settings = get_settings()
+    if not settings:
         print('Invalid command line flags')
         return 1
 
