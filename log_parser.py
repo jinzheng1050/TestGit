@@ -45,7 +45,7 @@ class LogParser():
         results = {}
         results['status'] = 'OK'
         results['error'] = ''
-        results['message'] = 'Successfully processed ' + str(total_line) + ' lines of logs. The results was saved in ' \
+        results['message'] = 'Successfully processed ' + str(total_lines) + ' lines of logs. The results was saved in ' \
                             + self.output_file + '.'
 
         return results
