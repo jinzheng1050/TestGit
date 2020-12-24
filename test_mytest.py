@@ -16,4 +16,4 @@ class TestMytest:
 
     def test_multiply_ab(self):
         lp = LogParser(3,6)
-        assert 18 == lp.multiply()
+        assert 18 == lp.multiply_ab()
