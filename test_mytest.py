@@ -1,5 +1,5 @@
 import mytest
-from mytest import LogParser
+from log_parser import LogParser
 
 
 class TestMytest:

@@ -43,7 +43,7 @@ def write_output_file():
 
 def process_data():
     print('Log parsing and processing.....')
-
+'''
 class LogParser():
 
     def __init__(self, a, b):
@@ -54,7 +54,7 @@ class LogParser():
 
     def multiply_ab(self):
         return self.a * self.b
-
+'''
 def validate_cmd_flags():
     print(sys.argv)
 
