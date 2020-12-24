@@ -42,6 +42,7 @@ class LogParser():
         with open(self.output_file, 'w') as fout:
             json.dump(self.data, fout)
 
+        results = {}
         results['status'] = 'OK'
         results['error'] = ''
         results['message'] = 'Successfully processed ' + str(total_line) + ' lines of logs. The results was saved in ' \
