@@ -29,7 +29,12 @@ class LogParser():
         end = line_block_size
 
         while True:
-            lines = f.readlines(end)
+            lines, count = [], 0
+            ln = f.readline()
+            while ln and count < line_block_size:
+                lines.append(ln)
+                ln = f.readline()
+                count += 1
             if not lines:
                 break
             end += line_block_size
