@@ -7,7 +7,7 @@ def get_settings():
     settings = {'input_file':'log.txt', 
                 'output_file': 'results.json'}
 
-    return True
+    return settings
 
 
 def log_parser_plugin():
