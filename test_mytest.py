@@ -7,5 +7,5 @@ class TestMytest:
         assert 4 == mytest.read_input_file('log.txt')
 
     def test_write_output_file(self):
-        assert 294 == mytest.write_output_file()
+        assert 294 == mytest.write_output_file('results.json')
 
