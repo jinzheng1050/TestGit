@@ -1,4 +1,6 @@
 import mytest
+from mytest import LogParser
+
 
 class TestMytest:
 
