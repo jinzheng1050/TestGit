@@ -1,15 +1,5 @@
 import json, sys, re
-'''
-class LogParser():
-
-    def __init__(self, file_in, file_out):
-        self.fin, self.fout = file_in, file_out
-        
-
-    def read_lines(self, lines=128):
-        pass
-'''
-
+from log_parser import LogParser
 
 def read_input_file(file_name):
     line_read = 0
@@ -20,7 +10,8 @@ def read_input_file(file_name):
             line = f.readline()
     return line_read
 
-def write_output_file():
+
+def write_output_file(file_name):
     dataout = {
         "total_number_of_lines_processed": 4,
         "total_number_of_lines_ok": 4,
@@ -37,24 +28,15 @@ def write_output_file():
             "/product/cart": 1.2
         }
     }
-    with open('out.json', 'w') as f:
+    with open(file_name, 'w') as f:
         json.dump(dataout, f)
     return len(json.dumps(dataout))
 
+
 def process_data():
     print('Log parsing and processing.....')
-'''
-class LogParser():
 
-    def __init__(self, a, b):
-        self.a, self.b = a,b
 
-    def plus_ab(self):
-        return self.a + self.b
-
-    def multiply_ab(self):
-        return self.a * self.b
-'''
 def validate_cmd_flags():
     print(sys.argv)
 
@@ -74,12 +56,13 @@ def log_parser_plugin():
 
     lines = read_input_file('log.txt')
     process_data()
-    length = write_output_file()
+    length = write_output_file('results.json')
     print('Read ' + str(lines) + ' lines, write ' + str(length) + ' characters to out.json.')
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
 
     log_parser_plugin()
+
+
 
