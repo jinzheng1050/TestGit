@@ -21,10 +21,10 @@ def log_parser_plugin():
     lp = LogParser(settings)
     results = lp.log_process()
 
-    if results.status != 'OK':
-        print(results.error)
+    if results['status'] != 'OK':
+        print(results['error'])
         return 1
-    print(results.message)
+    print(results['message'])
     return 0
 
 
