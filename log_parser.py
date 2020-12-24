@@ -24,7 +24,7 @@ class LogParser():
 
         self.results = {}
 
-    def read_line(f):
+    def read_line(self, f):
         return f.readline()
 
 
