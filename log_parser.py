@@ -31,7 +31,7 @@ class LogParser():
     def log_process(self):
         
         total_lines = 0
-        with open(self.input_file, 'r') as fin
+        with open(self.input_file, 'r') as fin:
             line = self.read_line(fin)
             while line:
                 total_lines += 1
@@ -39,7 +39,7 @@ class LogParser():
                 self.data() update
                 '''
                 line = self.read_line(fin)
-        with open(self.output_file, 'w') as fout
+        with open(self.output_file, 'w') as fout:
             json.dump(self.data, fout)
 
         results['status'] = 'OK'
