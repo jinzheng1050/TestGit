@@ -1,4 +1,4 @@
-import LogParser
+from log_parser import LogParser
 
 
 class TestLogParser:
