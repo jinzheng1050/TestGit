@@ -3,9 +3,10 @@ import mytest
 
 class TestMytest:
 
-#    def test_read_input_file(self):
+    def test_read_input_file(self):
 #        assert 4 == mytest.read_input_file('log.txt')
+        pass
 
-#    def test_write_output_file(self):
+    def test_write_output_file(self):
 #        assert 294 == mytest.write_output_file('results.json')
-
+        pass
