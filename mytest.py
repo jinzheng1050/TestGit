@@ -30,8 +30,10 @@ def get_settings(cmd):
 
     settings = load_config()
 
+    print(cmd)
     for i in range(1, len(cmd), 2):
         flag = cmd[i]
+        print(flag, cmd[i+1])
         if not flag.startswith('-') or flag[1:] not in settings:
             return 'Invalid'
         settings[flag[1:]] = cmd[i+1]
