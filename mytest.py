@@ -1,6 +1,6 @@
 import json, sys, re
 from log_parser import LogParser
-import configparser,traceback,inspect
+from ConfigParser import ConfigParser, NoSectionError, NoOptionError
 
 def load_config():
     def_settings = {}
