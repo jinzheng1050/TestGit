@@ -5,14 +5,16 @@ from ConfigParser import ConfigParser, NoSectionError, NoOptionError
 def load_config():
     def_settings = {}
     try:
-        config = configparser.ConfigParser()
+        print('load 1')
+        config = configparser.RawConfigParser()
         config.read('log_parser.conf')
         def_settings['in']              = config.get('LOG_PARSER', 'INPUT_FILE')
         def_settings['out']             = config.get('LOG_PARSER', 'OUTPUT_FILE')
         def_settings['max-client-ips']  = config.get('LOG_PARSER', 'MAX_CLIENT_IPS')
         def_settings['max-path']        = config.get('LOG_PARSER', 'MAX_PATH')
 
-    except (NoSectionError, NoOptionError):
+#    except (NoSectionError, NoOptionError):
+    except:
         print('Incorrect config file. Use default.')
         def_settings = {'in':'log.txt', 'out':'results.json','max-client-ips':10, 'max-path':10}
 #        pass
