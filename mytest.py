@@ -1,11 +1,11 @@
-import json, sys, ConfigParser, re
+import json, sys, configParser, re
 from log_parser import LogParser
 from ConfigParser import ConfigParser, NoSectionError, NoOptionError
 
 def load_config():
     def_settings = {}
     try:
-        config = Configparser.RawConfigParser()
+        config = configparser.ConfigParser()
         config.read('log_parser.conf')
         def_settings['in']              = config.get('LOG_PARSER', 'INPUT_FILE')
         def_settings['out']             = config.get('LOG_PARSER', 'OUTPUT_FILE')
