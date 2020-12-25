@@ -1,4 +1,4 @@
-import json, sys, re
+import json, sys, ConfigParser, re
 from log_parser import LogParser
 from ConfigParser import ConfigParser, NoSectionError, NoOptionError
 
