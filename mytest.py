@@ -40,7 +40,7 @@ def get_settings(cmd):
             return 'Invalid'
         settings[flag[1:]] = cmd[i+1]
         if flag[1:] in ('max-client-ips', 'max-path'):
-            if not cmd[i+1].isdight():
+            if not cmd[i+1].isdigit():
                 return None
             value = int(cmd[i+1])
             if value < 1 or value > 10000:
