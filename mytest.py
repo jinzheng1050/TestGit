@@ -5,7 +5,7 @@ from ConfigParser import ConfigParser, NoSectionError, NoOptionError
 def load_config():
     def_settings = {}
     try:
-        config = configparser.RawConfigParser()
+        config = Configparser.RawConfigParser()
         config.read('log_parser.conf')
         def_settings['in']              = config.get('LOG_PARSER', 'INPUT_FILE')
         def_settings['out']             = config.get('LOG_PARSER', 'OUTPUT_FILE')
