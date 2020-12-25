@@ -15,9 +15,10 @@ def load_config():
     except (NoSectionError, NoOptionError):
         print('Incorrect config file. Use default.')
         def_settings = {'in':'log.txt', 'out':'results.json','max-client-ips':10, 'max-path':10}
-        pass
-
-    return def_settings
+#        pass
+    
+    finally:
+        return def_settings
 
 
 def get_settings(cmd):
