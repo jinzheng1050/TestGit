@@ -12,9 +12,10 @@ def load_config():
         def_settings['max-client-ips']  = config.get('LOG_PARSER', 'MAX_CLIENT_IPS')
         def_settings['max-path']        = config.get('LOG_PARSER', 'MAX_PATH')
 
-    except NoSectionError, NoOptionError:
-
+    except (NoSectionError, NoOptionError):
+        print('Incorrect config file. Use default.')
         def_settings = {'in':'log.txt', 'out':'results.json','max-client-ips':10, 'max-path':10}
+        pass
 
     return def_settings
 
