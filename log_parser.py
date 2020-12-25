@@ -31,7 +31,7 @@ class LogParser():
             print('Started new block....')
             lines, count = [], 1
             ln = f.readline()
-            while ln and count <= line_block_size:
+            while ln and count < line_block_size:
                 lines.append(ln)
                 ln = f.readline()
                 count += 1
@@ -46,11 +46,10 @@ class LogParser():
         
         total_lines = 0
         with open(self.input_file, 'r') as fin:
-            i = 0
             for block in self.read_lines(fin):
-                print('Process block ' + str(i) + ', ' + str(len(block)) + ' lines')
-                print(block)
-                i += 1
+#                print('Process block ' + str(i) + ', ' + str(len(block)) + ' lines')
+#                print(block)
+                 total_lines += len(block)
 
         with open(self.output_file, 'w') as fout:
             json.dump(self.data, fout)
