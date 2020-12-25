@@ -18,6 +18,8 @@ def load_config():
 #        pass
     
     finally:
+        print('load config: ')
+        print(def_settings)
         return def_settings
 
 
@@ -40,18 +42,20 @@ def get_settings(cmd):
             if value < 1 or value > 10000:
                 return None
             settings[flag[1:]] = value
+    print('get_settings:')
     print(settings)
     return settings
 
 
 def log_parser_plugin(cmd):
 
-    print('Start Log-Parser......')
+    print('Start plugin......')
     settings = get_settings(cmd)
     if not settings:
         print('Invalid command line flags')
         return 1
 
+    print('Start log_parser...')
     lp = LogParser(settings)
     results = lp.log_process()
 

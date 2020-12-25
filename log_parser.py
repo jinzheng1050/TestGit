@@ -3,8 +3,8 @@ import json, sys, re
 class LogParser():
 
     def __init__(self, settings):
-        self.input_file = settings['input_file']
-        self.output_file = settings['output_file']
+        self.input_file = settings['in']
+        self.output_file = settings['out']
         self.data = { 
         "total_number_of_lines_processed": 4,
         "total_number_of_lines_ok": 4,
