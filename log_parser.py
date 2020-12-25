@@ -29,14 +29,15 @@ class LogParser():
 
         while True:
             print('Started new block....')
-            lines, count = [], 1
             ln = f.readline()
-            while ln and count < line_block_size:
-                lines.append(ln)
-                ln = f.readline()
-                count += 1
-            if not lines:
+            if not ln:
                 break
+            lines, count = [ln], 1
+            while ln and count < line_block_size:
+                ln = f.readline()
+                if ln:
+                    lines.append(ln)
+                    count += 1
             print('to yield...')
             print(lines)
             yield lines
