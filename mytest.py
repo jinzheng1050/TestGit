@@ -1,16 +1,16 @@
 import json, sys, re
 from log_parser import LogParser
 
-def load_default_settings():
+def load_config():
     def_settings = {'in':'log.txt', 'out':'results.json','max-client-ips':10, 'max-path':10}
     return def_settings
 
 def get_settings(cmd):
     print(cmd)
-    if len(lst)%2 == 0:
+    if len(cmd)%2 == 0:
         return None
 
-    settings = load_def_settings()
+    settings = load_config()
 
     for i in range(1, len(cmd), 2):
         flag = cmd[i]
