@@ -1,4 +1,4 @@
-import json, sys, re, time
+import json, sys, re, time, traceback
 
 class LogParser():
 
@@ -63,7 +63,7 @@ class LogParser():
                 self.raw_data['total_processed'] += 1
 
             except:
-                print('Exception')
+                traceback.print_exc() 
                 pass
 
         print('_block_process done')
