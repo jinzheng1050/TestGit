@@ -43,7 +43,7 @@ class LogParser():
             try:    
                 match = log_pattern.match(log)
                 print('match:')
-                print(matchi.groups())
+                print(match.groups())
                 if not match: continue
                 
                 ip = match.group(2)
