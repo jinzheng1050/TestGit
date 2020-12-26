@@ -1,6 +1,28 @@
 import json, sys, re, time, traceback
 from datetime import datetime
 
+class LogData():
+
+    def __init__(self):
+        
+        self.beg_time = int(round(time.time()))
+        self.end_time = 0
+        self.total_read = 0
+        self.total_processed = 0
+        self.ip_count = {}
+        self.path_count = {}
+
+    def __str__(self):
+        
+        print ('Parsed log data:\n\tRead: ' + str(self.total_read) + ', Processed:' + str(self.total_processed) \
+                + ', \n\tIP count: ' + str(self.ip_count) + ', \n\tPath count: ' + str(self.path_count))
+
+    def get_ranked_ips(self):
+
+
+    def get_rancked_paths(self):
+
+
 class LogParser():
 
 
@@ -36,9 +58,10 @@ class LogParser():
             yield lines
  
 
-    def _block_process (self, block):
+    def _block_process (self, block, logdata):
         
         self.raw_data['total_read'] += len(block)
+        logdata.total_read += len(block)
         log_pattern = re.compile(r'((.*) (.*) (.*) (\[(.*)\]) "(.*)" (\d+) (\d+) "(.*)")')    
         for log in block:
             try:    
@@ -48,6 +71,7 @@ class LogParser():
                 if not match: continue
                 
                 ip = match.group(2)
+                logdata.ip_count[ip] = logdata.ip_count.get(ip, 0) + 1
                 #print('ip: ' + ip)
                 ip_count_dict = self.raw_data['ip_count']
                 ip_count_dict[ip] = ip_count_dict.get(ip,0) + 1
@@ -61,16 +85,21 @@ class LogParser():
                 dt_second = int(dt.strftime('%s'))
                 self.raw_data['beg_time'] = min(self.raw_data['beg_time'], dt_second) 
                 self.raw_data['end_time'] = max(self.raw_data['end_time'], dt_second) 
- 
+                logdata.beg_time = min(logdata.beg_time, dt_second)
+                logdata.end_time = max(logdata.end_time, dt_second)
+
+
                 url = match.group(7)
                 full_path = url.split(' ')[1]
                 path = full_path.split('?')[0]
+                logdata.path_count[path] = logdata.path_count.get(path, 0) + 1
                 path_count_dict = self.raw_data['path_count']
                 path_count_dict[path] = path_count_dict.get(path, 0) + 1
                 self.raw_data['path_count'] = path_count_dict
                 #self.raw_data['path_count'][path] = self.raw_data['path_count'][path].get(path, 0) + 1
                 
                 self.raw_data['total_processed'] += 1
+                logdata.total_processed += 1
 
             except:
                 traceback.print_exc() 
@@ -78,6 +107,7 @@ class LogParser():
 
         print('_block_process done')
         print(self.raw_data)
+        print(logdata)
         print('raw data above')
 
 
@@ -102,7 +132,8 @@ class LogParser():
 
 
     def log_process (self):
-        
+       
+
         with open(self.settings['in'], 'r') as fin:
             for block in self._block_read(fin):
                 self._block_process(block)
