@@ -43,8 +43,8 @@ class LogParser():
         for log in block:
             try:    
                 match = log_pattern.match(log)
-                print('match:')
-                print(match.groups())
+                #print('match:')
+                #print(match.groups())
                 if not match: continue
                 
                 ip = match.group(2)
@@ -56,6 +56,7 @@ class LogParser():
                 #(self.raw_data['ip_count'])[ip] = (self.raw_data['ip_count'])[ip].get(ip, 0) + 1
     
                 dt = match.group(6)
+                print(dt + ', ' + ip + ', ' + self.raw_data['total_processed'])
                 dt = datetime.strptime(dt.split(' ')[0], '%d/%b/%Y:%H:%M:%S')
                 dt_second = int(dt.strftime('%s'))
                 self.raw_data['beg_time'] = min(self.raw_data['beg_time'], dt_second) 
