@@ -112,7 +112,7 @@ class LogParser():
             for block in self._block_read(fin):
                 self._block_process(block, logdata)
         
-        summary_data = self._data_summary(logdata{}
+        summary_data = self._data_summary(logdata)
 
         with open(self.settings['out'], 'w') as fout:
             json.dump(summary_data, fout)
