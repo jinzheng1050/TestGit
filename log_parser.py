@@ -43,7 +43,7 @@ class LogParser():
             try:    
                 match = log_pattern.match(log)
                 print('match:')
-                print(match)
+                print(matchi.groups())
                 if not match: continue
                 
                 ip = match.group(2)
@@ -63,6 +63,7 @@ class LogParser():
                 self.raw_data['total_processed'] += 1
 
             except:
+                print('Exception')
                 pass
 
         print('_block_process done')
