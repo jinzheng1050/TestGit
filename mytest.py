@@ -1,6 +1,5 @@
-import json, sys, configparser, re
+import json, sys, configparser
 from log_parser import LogParser
-from ConfigParser import ConfigParser, NoSectionError, NoOptionError
 
 def load_config():
     def_settings = {}
@@ -12,15 +11,14 @@ def load_config():
         def_settings['out']             = config.get('LOG_PARSER', 'OUTPUT_FILE')
         def_settings['max-client-ips']  = config.get('LOG_PARSER', 'MAX_CLIENT_IPS')
         def_settings['max-path']        = config.get('LOG_PARSER', 'MAX_PATH')
+        def_settings['line_block_size'] = config.get('LOG_PARSER', 'LINE_BLOCK_SIZE')
 
-#    except (NoSectionError, NoOptionError):
     except:
         print('Incorrect config file. Use default.')
-        def_settings = {'in':'log.txt', 'out':'results.json','max-client-ips':10, 'max-path':10}
-#        pass
+        def_settings = {'in':'log.txt', 'out':'results.json','max-client-ips':10, 'max-path':10, 'line_block_size':500}
     
     finally:
-        print('load config: ')
+        print('from default load')
         print(def_settings)
         return def_settings
 
