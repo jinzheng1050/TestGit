@@ -41,7 +41,7 @@ class LogParser():
         log_pattern = re.compile(r'((.*) (.*) (.*) (\[(.*)\]) "(.*)" (\d+) (\d+) "(.*)")')    
         for log in block:
             try:    
-                match = log_pattern.match(item)
+                match = log_pattern.match(log)
                 if not match: continue
                 
                 ip = match.group(2)
