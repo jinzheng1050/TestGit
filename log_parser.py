@@ -23,7 +23,7 @@ class LogData():
         ip_count_ordered = sorted(self.ip_count.items(), key=lambda x:x[1], reverse=True)
         return ip_count_ordered[0:top_n]
 
-    def get_rancked_paths(self, top_n):
+    def get_ranked_paths(self, top_n):
 
         time_span = self.end_time - self.beg_time
         path_avg_seconds = dict([(p, format(float(time_span)/n, '.2f')) for (p, n) in self.path_count.items()])
