@@ -4,17 +4,13 @@ from log_parser import LogParser
 def load_config():
     def_settings = {}
     try:
-        print('load 1')
         config = configparser.RawConfigParser()
         config.read('log_parser.conf')
         def_settings['in']              = config.get('LOG_PARSER', 'INPUT_FILE')
-        print('load 2')
         def_settings['out']             = config.get('LOG_PARSER', 'OUTPUT_FILE')
         def_settings['max-client-ips']  = config.getint('LOG_PARSER', 'MAX_CLIENT_IPS')
         def_settings['max-path']        = config.getint('LOG_PARSER', 'MAX_PATH')
-        print('load 3')
         def_settings['line_block_size'] = config.getint('LOG_PARSER', 'LINE_BLOCK_SIZE')
-        print('load 4')
 
     except:
         print('Incorrect config file. Use default.')

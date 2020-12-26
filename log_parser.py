@@ -42,6 +42,8 @@ class LogParser():
         for log in block:
             try:    
                 match = log_pattern.match(log)
+                print('match:')
+                print(match)
                 if not match: continue
                 
                 ip = match.group(2)
