@@ -17,10 +17,17 @@ class LogData():
         print ('Parsed log data:\n\tRead: ' + str(self.total_read) + ', Processed:' + str(self.total_processed) \
                 + ', \n\tIP count: ' + str(self.ip_count) + ', \n\tPath count: ' + str(self.path_count))
 
-    def get_ranked_ips(self):
+    def get_ranked_ips(self, top_n):
 
+        ip_count_ordered = sorted(self.ip_count.items(), key=lambda x:x[1], reverse=True)
+        return ip_count_ordered[0:top_n]
 
-    def get_rancked_paths(self):
+    def get_rancked_paths(self, top_n):
+
+        time_span = self.end_time - self.beg_time
+        path_avg_seconds = dict([(p, format(float(time_span)/n, '.2f')) for (p, n) in self.path_count.items()])
+        path_avg_seconds_ordered = sorted(path_avg_seconds.items(), key=lambda x:x[1])
+        return path_avg_seconds_ordered[0:top_n]          
 
 
 class LogParser():
@@ -133,18 +140,26 @@ class LogParser():
 
     def log_process (self):
        
-
+        logdata = LogData()
         with open(self.settings['in'], 'r') as fin:
             for block in self._block_read(fin):
-                self._block_process(block)
+                self._block_process(block, logdata)
         
         print('before _data_summary()')
         summary = self._data_summary()
+        sumdata = {}
+        sumdata['total_number_of_lines_processed'] = logdata.total_read
+        sumdata['total_number_of_lines_ok'] = logdata.total_processed
+        sumdata['total_number_of_lines_failed'] = logdata.total_read - logdata.total_processed
+        sumdata['top_client_ips'] = logdata.get_ranked_ips(self.settings['max-client-ips'])
+        sumdata['top_path_avg_seconds'] = logdata.get_ranked_paths(self.settings['max-path'])
+
 
         with open(self.settings['out'], 'w') as fout:
             json.dump(summary, fout)
 
         print(summary)
+        print(sumdata)
 
         results = {}
         results['status'] = 'OK'
