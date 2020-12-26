@@ -63,6 +63,10 @@ class LogParser():
             except:
                 pass
 
+        print('_block_process done')
+        print(self.raw_data)
+        print('raw data above')
+
 
     def _data_summary (self):
 
@@ -81,7 +85,6 @@ class LogParser():
         path_avg_seconds = dict([(p, format(float(time_span)/n, '.2f')) for (p, n) in path_count.items()])
         path_avg_seconds_ordered = sorted(path_avg_seconds.items(), key=lambda x:x[1])
         data['top_path_avg_seconds'] = path_avg_seconds_ordered[0:self.settings['max-path']]                                        
-        
         return data
 
 
@@ -91,6 +94,7 @@ class LogParser():
             for block in self._block_read(fin):
                 self._block_process(block)
         
+        print('before _data_summary()')
         summary = self._data_summary()
 
         with open(self.settings['out'], 'w') as fout:
