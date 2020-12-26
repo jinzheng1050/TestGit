@@ -29,7 +29,7 @@ class LogParser():
                 if ln:
                     lines.append(ln)
                     count += 1
-            print('to yield...')
+            print('to yield...' + str(count) + ' lines')
             print(lines)
             yield lines
  
@@ -65,7 +65,7 @@ class LogParser():
 
     def _data_summary (self):
 
-        data_ = {}
+        data = {}
 
         data['total_number_of_lines_processed'] = self.raw_data['total_read']
         data['total_number_of_lines_ok'] = self.raw_data['toal_processed']
@@ -76,7 +76,7 @@ class LogParser():
         data['top_client_ips'] = ip_count_ordered[0:self.settings['max-client-ips']]
 
         time_span = self.raw_data['end_time'] - self.raw_data['beg_time']
-        path_count =  self.raw_data['path_count']
+        path_count = self.raw_data['path_count']
         path_avg_seconds = dict([(p, format(float(time_span)/n, '.2f')) for (p, n) in path_count.items()])
         path_avg_seconds_ordered = sorted(path_avg_seconds.items(), key=lambda x:x[1])
         data['top_path_avg_seconds'] = path_avg_seconds_ordered[0:self.settings['max-path']]                                        
