@@ -34,7 +34,7 @@ class LogParser():
             yield lines
  
 
-    def _process_block (self, block):
+    def _block_process (self, block):
         
         self.raw_data['total_read'] += len(block)
         log_pattern = re.compile(r'((.*) (.*) (.*) (\[(.*)\]) "(.*)" (\d+) (\d+) "(.*)")')    
@@ -63,7 +63,6 @@ class LogParser():
                 pass
 
 
-
     def _data_summary (self):
 
         data_ = {}
@@ -87,25 +86,22 @@ class LogParser():
 
     def log_process (self):
         
-        total_lines = 0
-
         with open(self.settings['in'], 'r') as fin:
             for block in self._block_read(fin):
                 self._block_process(block)
-#                print('Process block ' + str(i) + ', ' + str(len(block)) + ' lines')
-#                print(block)
-                total_lines += len(block)
         
         summary = self._data_summary()
 
         with open(self.settings['out'], 'w') as fout:
-            json.dump(self.data, fout)
+            json.dump(summary, fout)
+
+        print(summary)
 
         results = {}
         results['status'] = 'OK'
         results['error'] = ''
-        results['message'] = 'Successfully processed ' + str(total_lines) + ' lines of logs. The results was saved in ' \
-                            + self.output_file + '.'
+        results['message'] = 'Successfully processed ' + str(summary['total_number_of_lines_processed']) \
+                            + ' lines of logs. The results was saved in ' + self.settings['out'] + '.'
 
         return results
 
