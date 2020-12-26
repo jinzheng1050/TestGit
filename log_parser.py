@@ -36,14 +36,7 @@ class LogParser():
 
     def __init__(self, settings):
         self.settings = settings
-        self.raw_data = { 
-            'beg_time': int(round(time.time())),
-            'end_time': 0,
-            'total_read': 0,
-            'total_processed': 0,
-            'ip_count': {},
-            'path_count': {},
-        }
+        self.log_pattern = re.compile(r'((.*) (.*) (.*) (\[(.*)\]) "(.*)" (\d+) (\d+) "(.*)")')    
         self.results = {}
 
 
@@ -68,31 +61,18 @@ class LogParser():
 
     def _block_process (self, block, logdata):
         
-        self.raw_data['total_read'] += len(block)
         logdata.total_read += len(block)
-        log_pattern = re.compile(r'((.*) (.*) (.*) (\[(.*)\]) "(.*)" (\d+) (\d+) "(.*)")')    
         for log in block:
             try:    
-                match = log_pattern.match(log)
-                #print('match:')
-                #print(match.groups())
+                match = self.log_pattern.match(log)
                 if not match: continue
                 
                 ip = match.group(2)
                 logdata.ip_count[ip] = logdata.ip_count.get(ip, 0) + 1
-                #print('ip: ' + ip)
-                ip_count_dict = self.raw_data['ip_count']
-                ip_count_dict[ip] = ip_count_dict.get(ip,0) + 1
-                self.raw_data['ip_count'] = ip_count_dict
-                #print(self.raw_data['ip_count'])
-                #(self.raw_data['ip_count'])[ip] = (self.raw_data['ip_count'])[ip].get(ip, 0) + 1
     
                 dt = match.group(6)
-                print(dt + ', ' + ip + ', ' + str(self.raw_data['total_processed']))
                 dt = datetime.strptime(dt.split(' ')[0], '%d/%b/%Y:%H:%M:%S')
                 dt_second = int(dt.strftime('%s'))
-                self.raw_data['beg_time'] = min(self.raw_data['beg_time'], dt_second) 
-                self.raw_data['end_time'] = max(self.raw_data['end_time'], dt_second) 
                 logdata.beg_time = min(logdata.beg_time, dt_second)
                 logdata.end_time = max(logdata.end_time, dt_second)
 
@@ -101,12 +81,7 @@ class LogParser():
                 full_path = url.split(' ')[1]
                 path = full_path.split('?')[0]
                 logdata.path_count[path] = logdata.path_count.get(path, 0) + 1
-                path_count_dict = self.raw_data['path_count']
-                path_count_dict[path] = path_count_dict.get(path, 0) + 1
-                self.raw_data['path_count'] = path_count_dict
-                #self.raw_data['path_count'][path] = self.raw_data['path_count'][path].get(path, 0) + 1
                 
-                self.raw_data['total_processed'] += 1
                 logdata.total_processed += 1
 
             except:
@@ -114,28 +89,19 @@ class LogParser():
                 pass
 
         print('_block_process done')
-        print(self.raw_data)
         print(logdata)
-        print('raw data above')
 
 
-    def _data_summary (self):
+    def _data_summary (self, logdata):
 
         data = {}
 
-        data['total_number_of_lines_processed'] = self.raw_data['total_read']
-        data['total_number_of_lines_ok'] = self.raw_data['total_processed']
-        data['total_number_of_lines_failed'] = data['total_number_of_lines_processed'] \
-                                                - data['total_number_of_lines_ok'] 
-        ip_count = self.raw_data['ip_count']
-        ip_count_ordered = sorted(ip_count.items(), key=lambda x:x[1], reverse=True)
-        data['top_client_ips'] = ip_count_ordered[0:self.settings['max-client-ips']]
-
-        time_span = self.raw_data['end_time'] - self.raw_data['beg_time']
-        path_count = self.raw_data['path_count']
-        path_avg_seconds = dict([(p, format(float(time_span)/n, '.2f')) for (p, n) in path_count.items()])
-        path_avg_seconds_ordered = sorted(path_avg_seconds.items(), key=lambda x:x[1])
-        data['top_path_avg_seconds'] = path_avg_seconds_ordered[0:self.settings['max-path']]                                        
+        data['total_number_of_lines_processed'] = logdata.total_read
+        data['total_number_of_lines_ok'] = logdata.total_processed
+        data['total_number_of_lines_failed'] = logdata.total_read - logdata.total_processed
+        data['top_client_ips'] = logdata.get_ranked_ips(self.settings['max-client-ips'])
+        data['top_path_avg_seconds'] = logdata.get_ranked_paths(self.settings['max-path'])
+        
         return data
 
 
@@ -146,27 +112,17 @@ class LogParser():
             for block in self._block_read(fin):
                 self._block_process(block, logdata)
         
-        print('before _data_summary()')
-        summary = self._data_summary()
-        sumdata = {}
-        sumdata['total_number_of_lines_processed'] = logdata.total_read
-        sumdata['total_number_of_lines_ok'] = logdata.total_processed
-        sumdata['total_number_of_lines_failed'] = logdata.total_read - logdata.total_processed
-        sumdata['top_client_ips'] = logdata.get_ranked_ips(self.settings['max-client-ips'])
-        sumdata['top_path_avg_seconds'] = logdata.get_ranked_paths(self.settings['max-path'])
-
+        summary_data = self._data_summary(logdata{}
 
         with open(self.settings['out'], 'w') as fout:
-            json.dump(summary, fout)
+            json.dump(summary_data, fout)
 
-        print(summary)
-        print(sumdata)
+        print('Final results')
+        print(summary_data)
 
-        results = {}
-        results['status'] = 'OK'
-        results['error'] = ''
-        results['message'] = 'Successfully processed ' + str(summary['total_number_of_lines_processed']) \
-                            + ' lines of logs. The results was saved in ' + self.settings['out'] + '.'
+        message = 'Successfully processed ' + str(summary_data['total_number_of_lines_processed']) \
+                    + ' lines of logs. The results was saved in ' + self.settings['out'] + '.'
+        results = {'status':'OK', 'error':'', 'message':message}
 
         return results
 
