@@ -48,12 +48,12 @@ class LogParser():
                 if not match: continue
                 
                 ip = match.group(2)
-                print('ip: ' + ip)
-                ip_count_dict = self.raw_data['ip_count']
-                ip_count_dict[ip] = ip_count_dict.get(ip,0) + 1
-                self.raw_data['ip_count'] = ip_count_dict
-                print(self.raw_data['ip_count'])
-                #self.raw_data['ip_count'][ip] = self.raw_data['ip_count'][ip].get(ip, 0) + 1
+                #print('ip: ' + ip)
+                #ip_count_dict = self.raw_data['ip_count']
+                #ip_count_dict[ip] = ip_count_dict.get(ip,0) + 1
+                #self.raw_data['ip_count'] = ip_count_dict
+                #print(self.raw_data['ip_count'])
+                (self.raw_data['ip_count'])[ip] = (self.raw_data['ip_count'])[ip].get(ip, 0) + 1
     
                 dt = match.group(6)
                 dt = datetime.strptime(dt.split(' ')[0], '%d/%b/%Y:%H:%M:%S')
@@ -64,7 +64,10 @@ class LogParser():
                 url = match.group(7)
                 full_path = url.split(' ')[1]
                 path = full_path.split('?')[0]
-                self.raw_data['path_count'][path] = self.raw_data['path_count'][path].get(path, 0) + 1
+                path_count_dict = self.raw_data['path_count']
+                path_count_dict[path] = path_count_dict.get(path, 0) + 1
+                self.raw_data['path_count'] = path_count_dict
+                #self.raw_data['path_count'][path] = self.raw_data['path_count'][path].get(path, 0) + 1
                 
                 self.raw_data['total_processed'] += 1
 
