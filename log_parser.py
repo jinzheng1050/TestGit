@@ -22,6 +22,7 @@ class LogParser():
             print('Started new block....')
             ln = f.readline()
             if not ln:
+                print('finished all blocks')
                 break
             lines, count = [ln], 1
             while ln and count < self.settings['line_block_size']:
@@ -68,7 +69,7 @@ class LogParser():
         data = {}
 
         data['total_number_of_lines_processed'] = self.raw_data['total_read']
-        data['total_number_of_lines_ok'] = self.raw_data['toal_processed']
+        data['total_number_of_lines_ok'] = self.raw_data['total_processed']
         data['total_number_of_lines_failed'] = data['total_number_of_lines_processed'] \
                                                 - data['total_number_of_lines_ok'] 
         ip_count = self.raw_data['ip_count']
