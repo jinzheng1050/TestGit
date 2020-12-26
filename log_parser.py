@@ -47,7 +47,12 @@ class LogParser():
                 if not match: continue
                 
                 ip = match.group(2)
-                self.raw_data['ip_count'][ip] = self.raw_data['ip_count'][ip].get(ip, 0) + 1
+                print('ip: ' + ip)
+                ip_count_dict = self.raw_data['ip_count']
+                ip_count_dict[ip] = ip_count_dict.get(ip,0) + 1
+                self.raw_data['ip_count'] = ip_count_dict
+                print(self.raw_data['ip_count'])
+                #self.raw_data['ip_count'][ip] = self.raw_data['ip_count'][ip].get(ip, 0) + 1
     
                 dt = match.group(6)
                 dt = datetime.strptime(dt.split(' ')[0], '%d/%b/%Y:%H:%M:%S')
