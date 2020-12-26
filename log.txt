@@ -26,7 +26,7 @@ lj1-036.inktomisearch.com - - [28/Sep/2020:13:55:37 -0800] "GET /robots.txt HTTP
 112.21.100.55 - root [28/Sep/2020:13:55:36 +0000] "GET /admin.php?top=34 HTTP/1.1" 404 50 "python-requests/2.21.0"
 217.160.165.173 - - [28/Sep/2020:13:55:37 0500] "GET /foo.jsp?<SCRIPT>foo</SCRIPT>.jsp HTTP/1.1" 200 578 "" "Mozilla/4.75 [en] (X11, U; Nessus)"
 217.160.165.173 - - [28/Sep/2020:13:55:37 0500] "GET /cgibin/cvslog.cgi?file=<SCRIPT>window.alert</SCRIPT> HTTP/1.1" 403 302 "" "Mozilla/4.75 [en] (X11, U; Nessus)"
-81.171.1.165 - - [28/Sepuuuuuu/2020:13:55:38 0500] "HEAD http://www.sweetgeorgia.com/cgibin/af.cgi?_browser_out=|echo;id;exit| HTTP/1.0" 200 0 "http://www.sweetgeorgia.com/cgibin/af.cgi?_browser_out=|echo;id;exit|" "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)"
+81.171.1.165 - - [28/Sep/2020:13:55:38 0500] "HEAD http://www.sweetgeorgia.com/cgibin/af.cgi?_browser_out=|echo;id;exit| HTTP/1.0" 200 0 "http://www.sweetgeorgia.com/cgibin/af.cgi?_browser_out=|echo;id;exit|" "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)"
 112.21.100.55 - root [28/Sep/2020:13:55:37 +0000] "GET /admin.php HTTP/1.1" 404 50 "python-requests/2.21.0"
 66.138.147.49 - - [28/Sep/2020:13:55:38 0500] "GET http://login.korea.yahoo.com/config/login?.redir_from=PROFILES?.&login=&.tries=1&.src=jpg&.last=&promo=&.intl=us&.bypass=&.partner=&.chkP=Y&.done=http://jpager.yahoo.com/jpager/pager2.shtml&login=blood`1234567890&passwd=password HTTP/1.0" 200 566 "" ""
 68.48.142.117 - - [28/Sep/2020:13:55:38 0500] "GET /scripts/..%255c../winnt/system32/cmd.exe?/c+dir HTTP/1.0" 200 566 "" ""
