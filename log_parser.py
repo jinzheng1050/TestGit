@@ -15,6 +15,7 @@ class LogData():
     def __str__(self):
         
         print ('Parsed log data:\n\tRead: ' + str(self.total_read) + ', Processed:' + str(self.total_processed) \
+                + ', \n\tTime span: ' + str(self.beg_time) + '-' + str(self.end_time) \
                 + ', \n\tIP count: ' + str(self.ip_count) + ', \n\tPath count: ' + str(self.path_count))
 
     def get_ranked_ips(self, top_n):
